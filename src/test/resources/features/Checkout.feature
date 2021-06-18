@@ -7,6 +7,7 @@ Feature: Checkout items from sauce store
     And User type the password "secret_sauce"
     And User click the login button
 
+   @smoke
   Scenario: User clicking an Add To Cart button
     When User click the Add To Cart Button
     Then The button label should be changed to "REMOVE"

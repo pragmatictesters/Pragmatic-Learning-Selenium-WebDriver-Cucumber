@@ -56,4 +56,10 @@ public class InventorySteps extends TestBase {
     public void userTakeNoteOfAnItem() {
         inventoryPage.takeNoteOfAnItem();
     }
+
+    @When("User has clicked product {string}")
+    public void userHasClickedProduct(String item_name) {
+        inventoryPage.clickItem(item_name);
+
+    }
 }

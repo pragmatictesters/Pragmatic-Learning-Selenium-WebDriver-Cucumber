@@ -1,6 +1,7 @@
 Feature: Login to sauce store
 
 
+  @login
   Scenario: User login as a standard user
     Given User has accessed the login page
     When  User type the username "standard_user"

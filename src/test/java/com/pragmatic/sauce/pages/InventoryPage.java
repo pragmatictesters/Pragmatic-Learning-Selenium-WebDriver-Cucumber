@@ -7,7 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ public class InventoryPage {
 
 
     private final WebDriver webDriver;
+    WebDriverWait wait;
 
     @FindBy(css = "button.btn_inventory")
     List<WebElement> lstAddToCartButtons;
@@ -36,6 +40,7 @@ public class InventoryPage {
     public InventoryPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(this.webDriver, this);
+        wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
     }
 
     public String getCurrentURL() {
@@ -43,6 +48,7 @@ public class InventoryPage {
     }
 
     public void clickAddToCartButton() {
+        randomButtonIndex = faker.number().numberBetween(0, lstAddToCartButtons.size() - 1);
         System.out.println("InventoryPage.clickAddToCartButton");
         System.out.println("randomButtonIndex = " + randomButtonIndex);
         randomButton = lstAddToCartButtons.get(randomButtonIndex);
@@ -61,6 +67,9 @@ public class InventoryPage {
     }
 
     public void clickCartIcon() {
+        wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.shopping_cart_badge"))
+        );
         eleCartIcon.click();
     }
 
@@ -69,5 +78,10 @@ public class InventoryPage {
         randomButton = lstAddToCartButtons.get(randomButtonIndex);
         WebElement eleItemName = randomButton.findElement(By.xpath("//ancestor::div[@class='inventory_item']/following::div[@class='inventory_item_name']"));
         RunTimeData.selectedItemName = eleItemName.getText();
+    }
+
+    public void clickItem(String item_name) {
+        String item_xpath = "//div[text()='" + item_name +  "']";
+        webDriver.findElement(By.xpath(item_xpath)).click();
     }
 }

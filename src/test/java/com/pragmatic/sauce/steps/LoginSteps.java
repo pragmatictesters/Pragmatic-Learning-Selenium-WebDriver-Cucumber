@@ -2,6 +2,7 @@ package com.pragmatic.sauce.steps;
 
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.LoginPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
