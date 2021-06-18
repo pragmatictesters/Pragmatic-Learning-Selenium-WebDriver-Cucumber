@@ -8,7 +8,7 @@ Feature: Checkout items from sauce store
     And User click the login button
 
   Scenario: User clicking an Add To Cart button
-    When User click an Add To Cart Button
+    When User click the Add To Cart Button
     Then The button label should be changed to "REMOVE"
     And Items in the shopping cart should be "1"
 
