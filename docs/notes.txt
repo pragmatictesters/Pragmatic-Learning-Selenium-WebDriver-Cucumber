@@ -1,0 +1,4 @@
+1. Create the packages for steps and pages in advance
+2. Create one step definition at a time
+3. Run the scenario and see if it work before adding actions/assertions
+4.
