@@ -15,7 +15,12 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions (
         features = {"classpath:features/"},
-        glue = "com.pragmatic.sauce.steps"
+        glue = "com.pragmatic.sauce.steps",
+        dryRun = false,
+        monochrome = false,
+        publish = true,
+        tags = "@smoke or @login",
+        plugin = {"pretty", "html:target/cucumber.html"}
 )
 public class RunTests {
 

@@ -3,10 +3,14 @@ package com.pragmatic.sauce.steps;
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.LoginPage;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 /**
@@ -18,6 +22,17 @@ public class LoginSteps  extends TestBase {
 
 
     private LoginPage loginPage;
+
+    @Before
+    public void before(Scenario scenario){
+
+    }
+
+
+    @After
+    public void after(Scenario scenario){
+
+    }
 
     @Given("User has accessed the login page")
     public void userHasAccessedTheLoginPage() {
