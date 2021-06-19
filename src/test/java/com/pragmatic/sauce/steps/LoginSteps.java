@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 /**
@@ -23,6 +24,7 @@ public class LoginSteps  extends TestBase {
 
     @Given("User has accessed the login page")
     public void userHasAccessedTheLoginPage() {
+        WebDriver webDriver = getWebDriver();
         webDriver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(webDriver);
     }

@@ -4,6 +4,7 @@ import com.pragmatic.sauce.RunTimeData;
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.CartPage;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -17,15 +18,15 @@ public class CartSteps extends TestBase {
 
     private CartPage cartPage;
 
-    @Before
-    public void before(){
-         cartPage = new CartPage(webDriver);
+    @BeforeStep
+    public void beforeStep(){
+        if (cartPage==null) cartPage = new CartPage(getWebDriver());
     }
 
     @Then("User should be directed to the cart page {string}")
     public void userShouldBeDirectedToTheCartPage(String expected_url) {
         String actual_url = cartPage.getCurrentURL();
-        Assert.assertEquals(actual_url,expected_url);
+        Assert.assertEquals(actual_url, expected_url);
     }
 
     @And("Item count in the cart page should be {string}")

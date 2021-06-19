@@ -3,6 +3,7 @@ package com.pragmatic.sauce.steps;
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.MenuPage;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 
@@ -16,9 +17,9 @@ public class MenuSteps  extends TestBase {
 
     private MenuPage menuPage;
 
-    @Before
+    @BeforeStep
     public void before(){
-        menuPage = new MenuPage(webDriver);
+       if(menuPage ==null) menuPage = new MenuPage(getWebDriver());
     }
 
     @When("User clicked on the left top icon")

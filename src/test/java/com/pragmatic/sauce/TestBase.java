@@ -13,13 +13,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 public class TestBase {
 
-    public static WebDriver webDriver;
+    private static WebDriver webDriver;
 
-    public TestBase() {
-        if (webDriver==null) {
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
-        }
+
+    public static WebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    public static void setWebDriver(WebDriver webDriver) {
+        TestBase.webDriver = webDriver;
     }
 
     public void clearBrowser() {

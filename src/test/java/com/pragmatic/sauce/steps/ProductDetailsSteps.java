@@ -3,6 +3,7 @@ package com.pragmatic.sauce.steps;
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.ProductDetailsPage;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -17,9 +18,9 @@ public class ProductDetailsSteps extends TestBase {
 
     private ProductDetailsPage productDetailPage;
 
-    @Before
-    public void before() {
-        productDetailPage = new ProductDetailsPage(webDriver);
+    @BeforeStep
+    public void beforeStep() {
+        if (productDetailPage==null) productDetailPage = new ProductDetailsPage(getWebDriver());
     }
 
     @Then("User should be directed to the product details page {string}")

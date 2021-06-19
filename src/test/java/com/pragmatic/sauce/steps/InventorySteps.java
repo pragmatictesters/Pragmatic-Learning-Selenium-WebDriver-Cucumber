@@ -3,6 +3,7 @@ package com.pragmatic.sauce.steps;
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.InventoryPage;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,19 +14,17 @@ import org.testng.Assert;
  *
  * @Author Janesh Kodikara
  */
-public class InventorySteps  extends TestBase {
+public class InventorySteps extends TestBase {
 
     private InventoryPage inventoryPage;
 
-
-    @Before
-    public void before() {
-        inventoryPage = new InventoryPage(webDriver);
+    @BeforeStep
+    public void beforeStep() {
+        if (inventoryPage == null) inventoryPage = new InventoryPage(getWebDriver());
     }
 
     @Then("User should be directed to the inventory page {string}")
     public void userShouldBeDirectedToTheInventoryPage(String expected_url) {
-
         String actualURL = inventoryPage.getCurrentURL();
         Assert.assertEquals(actualURL, expected_url);
     }
