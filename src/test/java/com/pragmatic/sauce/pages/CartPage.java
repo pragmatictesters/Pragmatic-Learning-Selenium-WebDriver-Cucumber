@@ -20,6 +20,14 @@ public class CartPage {
     @FindBy(css = "div.inventory_item_name")
     WebElement eleItemName;
 
+    @FindBy(css = ".inventory_item_price")
+    WebElement eleItemPrice;
+
+    @FindBy(css = ".inventory_item_desc")
+    WebElement eleItemDescription;
+
+
+
     public CartPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(this.webDriver, this);
@@ -36,5 +44,13 @@ public class CartPage {
 
     public String getItemName() {
         return eleItemName.getText();
+    }
+
+    public String getItemPrice() {
+        return  eleItemPrice.getText().trim();
+    }
+
+    public String getItemDescription() {
+        return eleItemDescription.getText();
     }
 }

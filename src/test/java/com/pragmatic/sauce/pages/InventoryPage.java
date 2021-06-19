@@ -2,6 +2,7 @@ package com.pragmatic.sauce.pages;
 
 import com.github.javafaker.Faker;
 import com.pragmatic.sauce.RunTimeData;
+import com.pragmatic.sauce.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ import java.util.List;
  *
  * @Author Janesh Kodikara
  */
-public class InventoryPage {
+public class InventoryPage  {
 
 
     private final WebDriver webDriver;
@@ -27,20 +28,32 @@ public class InventoryPage {
     @FindBy(css = "button.btn_inventory")
     List<WebElement> lstAddToCartButtons;
 
+    @FindBy(css = ".inventory_item_price")
+    List<WebElement> lstInventoryItemPrice;
+
+    @FindBy(css = ".inventory_item_name")
+    List<WebElement> lstItemName;
+
+    @FindBy(css = ".inventory_item_desc")
+    List<WebElement> lstItemDescription;
+
     @FindBy(css = "span.shopping_cart_badge")
     WebElement eleCartIcon;
+
+
 
     private Faker faker = new Faker();
 
 
     private int randomButtonIndex;
     private WebElement randomButton;
+    private String strIDSelectedItem;
 
 
     public InventoryPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(this.webDriver, this);
-        wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
     }
 
     public String getCurrentURL() {
@@ -52,7 +65,10 @@ public class InventoryPage {
         System.out.println("InventoryPage.clickAddToCartButton");
         System.out.println("randomButtonIndex = " + randomButtonIndex);
         randomButton = lstAddToCartButtons.get(randomButtonIndex);
+        strIDSelectedItem = randomButton.getAttribute("id");
+        strIDSelectedItem = strIDSelectedItem.replace("add-to-cart", "remove");
         randomButton.click();
+
     }
 
     public String getTheButtonLabel() {
@@ -73,15 +89,28 @@ public class InventoryPage {
         eleCartIcon.click();
     }
 
-    public void takeNoteOfAnItem() {
-        randomButtonIndex = faker.number().numberBetween(0, lstAddToCartButtons.size() - 1);
-        randomButton = lstAddToCartButtons.get(randomButtonIndex);
-        WebElement eleItemName = randomButton.findElement(By.xpath("//ancestor::div[@class='inventory_item']/following::div[@class='inventory_item_name']"));
-        RunTimeData.selectedItemName = eleItemName.getText();
-    }
 
     public void clickItem(String item_name) {
         String item_xpath = "//div[text()='" + item_name +  "']";
         webDriver.findElement(By.xpath(item_xpath)).click();
+    }
+
+    public void notePriceOfSelectedItem() {
+        WebElement elePrice = lstInventoryItemPrice.get(randomButtonIndex);
+        String price = elePrice.getText();
+        RunTimeData.selectedItemPrice = price;
+    }
+
+    public void noteNameOfTheSelectedItem() {
+        WebElement eleItemName = lstItemName.get(randomButtonIndex);
+        String itemName = eleItemName.getText();
+        RunTimeData.selectedItemName = itemName;
+    }
+
+
+    public void noteDescriptionOfTheSelectedItem() {
+        WebElement eleItemDescription = lstItemDescription.get(randomButtonIndex);
+        String itemDescriptionText = eleItemDescription.getText();
+        RunTimeData.selectedItemDescription = itemDescriptionText;
     }
 }

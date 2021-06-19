@@ -24,12 +24,6 @@ import org.junit.runner.RunWith;
 )
 public class RunTests {
 
-    @After
-    public void after(){
-        System.out.println("I run after everything");
-        if (TestBase.webDriver!=null){
-            TestBase.webDriver.quit();
-        }
-    }
+
 
 }

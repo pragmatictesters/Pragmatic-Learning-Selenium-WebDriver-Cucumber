@@ -25,10 +25,15 @@ public class MenuPage {
     @FindBy(css = "#logout_sidebar_link")
     WebElement eleLogout;
 
+    @FindBy(css = "#reset_sidebar_link")
+    WebElement eleReset;
+
+
+
     public MenuPage(WebDriver webDriver) {
         this.webDriver= webDriver;
         PageFactory.initElements(this.webDriver, this);
-        wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(30));
     }
 
     public void clickIcon() {
@@ -38,6 +43,12 @@ public class MenuPage {
     public void clickLogout() {
         wait.until(
                 ExpectedConditions.elementToBeClickable(eleLogout)
+        ).click();
+    }
+
+    public void clickResetLink() {
+        wait.until(
+                ExpectedConditions.elementToBeClickable(eleReset)
         ).click();
     }
 }

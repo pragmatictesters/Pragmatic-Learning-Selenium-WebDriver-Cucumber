@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LoginPage {
 
+    private final WebDriver webDriver;
+
     @FindBy(css = "#user-name")
     WebElement eleUsername;
 
@@ -25,7 +27,8 @@ public class LoginPage {
     WebElement eleError;
 
     public LoginPage(WebDriver webDriver) {
-        PageFactory.initElements(webDriver, this);
+        this.webDriver = webDriver;
+        PageFactory.initElements(this.webDriver, this);
     }
 
     public LoginPage typeUsername(String username) {
@@ -44,5 +47,15 @@ public class LoginPage {
 
     public String getError() {
         return eleError.getText().trim();
+    }
+
+    public String getCurrentURL() {
+        return webDriver.getCurrentUrl();
+    }
+
+    public boolean isLoginPageLoaded() {
+        boolean isLoaded = false;
+        if (eleLoginButton.isEnabled() && elePassword.isEnabled() && eleUsername.isEnabled()) isLoaded = true;
+        return isLoaded;
     }
 }

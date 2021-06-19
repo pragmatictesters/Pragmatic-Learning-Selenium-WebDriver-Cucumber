@@ -2,15 +2,12 @@ package com.pragmatic.sauce.steps;
 
 import com.pragmatic.sauce.TestBase;
 import com.pragmatic.sauce.pages.LoginPage;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
 /**
@@ -23,26 +20,17 @@ public class LoginSteps  extends TestBase {
 
     private LoginPage loginPage;
 
-    @Before
-    public void before(Scenario scenario){
-
-    }
-
-
-    @After
-    public void after(Scenario scenario){
-
-    }
 
     @Given("User has accessed the login page")
     public void userHasAccessedTheLoginPage() {
         webDriver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(webDriver);
-
     }
 
+
+
     @When("User type the username {string}")
-    public void userTypeTheUsername(String username) {
+    public void  userTypeTheUsername(String username) {
         loginPage.typeUsername(username);
     }
 
@@ -60,5 +48,17 @@ public class LoginSteps  extends TestBase {
     public void userShouldSeeErrorMessage(String expectedError) {
         String actualError = loginPage.getError();
         Assert.assertEquals(actualError, expectedError);
+    }
+
+    @Then("User should be directed to the login page {string}")
+    public void userShouldBeDirectedToTheLoginPage(String expected_url) {
+        String actual_url = loginPage.getCurrentURL();
+        Assert.assertTrue(actual_url.matches("^%s/?$".formatted(expected_url)));
+    }
+
+    @And("User should see the login panel")
+    public void userShouldSeeTheLoginPanel() {
+       boolean isLoaded = loginPage.isLoginPageLoaded();
+       Assert.assertTrue(isLoaded);
     }
 }

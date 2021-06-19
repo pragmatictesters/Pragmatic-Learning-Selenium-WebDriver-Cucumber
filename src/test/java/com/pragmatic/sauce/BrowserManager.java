@@ -1,8 +1,6 @@
 package com.pragmatic.sauce;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -11,20 +9,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @Author Janesh Kodikara
  */
-public class TestBase {
+public class BrowserManager {
 
-    public static WebDriver webDriver;
 
-    public TestBase() {
+    private static ChromeDriver webDriver = null;
+
+    public static WebDriver getBrowser() {
         if (webDriver==null) {
             WebDriverManager.chromedriver().setup();
             webDriver = new ChromeDriver();
         }
+        return webDriver;
     }
 
-    public void clearBrowser() {
-        webDriver.manage().deleteAllCookies();
-        webDriver.get("chrome://settings/clearBrowserData");
-        webDriver.findElement(By.xpath("//settings-ui")).sendKeys(Keys.ENTER);
+
+    public static void closeBrowser() {
+        if(webDriver!=null){
+            webDriver.quit();
+        }
     }
 }

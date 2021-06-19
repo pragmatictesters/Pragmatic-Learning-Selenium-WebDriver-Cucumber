@@ -13,7 +13,7 @@ import org.testng.Assert;
  *
  * @Author Janesh Kodikara
  */
-public class InventorySteps extends TestBase {
+public class InventorySteps  extends TestBase {
 
     private InventoryPage inventoryPage;
 
@@ -25,6 +25,7 @@ public class InventorySteps extends TestBase {
 
     @Then("User should be directed to the inventory page {string}")
     public void userShouldBeDirectedToTheInventoryPage(String expected_url) {
+
         String actualURL = inventoryPage.getCurrentURL();
         Assert.assertEquals(actualURL, expected_url);
     }
@@ -54,12 +55,27 @@ public class InventorySteps extends TestBase {
 
     @When("User take note of an item")
     public void userTakeNoteOfAnItem() {
-        inventoryPage.takeNoteOfAnItem();
+        inventoryPage.notePriceOfSelectedItem();
     }
 
     @When("User has clicked product {string}")
     public void userHasClickedProduct(String item_name) {
         inventoryPage.clickItem(item_name);
 
+    }
+
+    @And("User take a note of the item price")
+    public void userTakeANoteOfTheItemPrice() {
+        inventoryPage.notePriceOfSelectedItem();
+    }
+
+    @And("User take a note of the item name")
+    public void userTakeANoteOfTheItemName() {
+        inventoryPage.noteNameOfTheSelectedItem();
+    }
+
+    @And("User take a note of the item description")
+    public void userTakeANoteOfTheItemDescription() {
+        inventoryPage.noteDescriptionOfTheSelectedItem();
     }
 }

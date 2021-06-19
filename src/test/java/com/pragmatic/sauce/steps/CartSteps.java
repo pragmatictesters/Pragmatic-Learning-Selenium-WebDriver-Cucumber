@@ -6,7 +6,6 @@ import com.pragmatic.sauce.pages.CartPage;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 /**
@@ -41,4 +40,23 @@ public class CartSteps extends TestBase {
         Assert.assertEquals(actual_item_name, RunTimeData.selectedItemName);
     }
 
+    @And("Item price in the cart should match")
+    public void itemPriceInTheCartShouldMatch() {
+        String actual_item_price = cartPage.getItemPrice();
+        Assert.assertEquals(actual_item_price, RunTimeData.selectedItemPrice);
+
+    }
+
+    @And("Item name in the cart should match")
+    public void itemNameInTheCartShouldMatch() {
+        String actual_item_name = cartPage.getItemName();
+        Assert.assertEquals(actual_item_name, RunTimeData.selectedItemName);
+    }
+
+
+    @And("Item description in the cart should match")
+    public void itemDescriptionInTheCartShouldMatch() {
+        String actual_item_description = cartPage.getItemDescription();
+        Assert.assertEquals(actual_item_description, RunTimeData.selectedItemDescription);
+    }
 }

@@ -8,5 +8,6 @@ package com.pragmatic.sauce;
 public class RunTimeData {
 
     public static String selectedItemName;
-
+    public static String selectedItemPrice;
+    public static String selectedItemDescription;
 }

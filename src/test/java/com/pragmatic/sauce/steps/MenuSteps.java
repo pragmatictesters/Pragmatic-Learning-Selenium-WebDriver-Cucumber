@@ -30,4 +30,10 @@ public class MenuSteps  extends TestBase {
     public void userClickTheLogoutLink() {
         menuPage.clickLogout();
     }
+
+    @And("User reset the application state")
+    public void userResetTheApplicationState() {
+        menuPage.clickIcon();
+        menuPage.clickResetLink();
+    }
 }
